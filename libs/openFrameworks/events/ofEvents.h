@@ -43,14 +43,13 @@ public:
   	,key(0)
 	,keycode(0)
 	,scancode(0)
-	,codepoint(0){}
+	{}
 
-	ofKeyEventArgs(Type type, int key, int keycode, int scancode, unsigned int codepoint)
+	ofKeyEventArgs(Type type, int key, int keycode, int scancode)
 	:type(type)
 	,key(key)
 	,keycode(keycode)
-	,scancode(scancode)
-	,codepoint(codepoint){
+	,scancode(scancode){
 
 	}
 
@@ -58,8 +57,7 @@ public:
 	:type(type)
 	,key(key)
 	,keycode(0)
-	,scancode(0)
-	,codepoint(0){
+	,scancode(0){
 
 	}
 
@@ -70,8 +68,6 @@ public:
 	int keycode;
 	/// \brief The raw scan code returned by the keyboard, OS and hardware specific. 
 	int scancode;
-	/// \brief The Unicode code point you'd expect if this key combo (including modifier keys) was pressed in a text editor, or -1 for non-printable characters. 
-	uint32_t codepoint;
 };
 
 class ofMouseEventArgs : public ofEventArgs, public ofVec2f {
@@ -247,8 +243,8 @@ class ofCoreEvents {
 	bool notifyUpdate();
 	bool notifyDraw();
 
-	bool notifyKeyPressed(int key, int keycode=-1, int scancode=-1, uint32_t codepoint=0);
-	bool notifyKeyReleased(int key, int keycode=-1, int scancode=-1, uint32_t codepoint=0);
+	bool notifyKeyPressed(int key, int keycode=-1, int scancode=-1);
+	bool notifyKeyReleased(int key, int keycode=-1, int scancode=-1);
 	bool notifyKeyEvent(const ofKeyEventArgs & keyEvent);
 
 	bool notifyMousePressed(int x, int y, int button);

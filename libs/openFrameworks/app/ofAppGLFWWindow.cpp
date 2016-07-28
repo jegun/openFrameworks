@@ -1057,7 +1057,7 @@ void ofAppGLFWWindow::error_cb(int errorCode, const char* errorDescription){
 }
 
 //------------------------------------------------------------
-void ofAppGLFWWindow::keyboard_cb(GLFWwindow* windowP_, int keycode, int scancode, unsigned int codepoint, int action, int mods) {
+void ofAppGLFWWindow::keyboard_cb(GLFWwindow* windowP_, int keycode, int scancode, int action, int mods) {
 	int key;
 	switch (keycode) {
 		case GLFW_KEY_ESCAPE:
@@ -1166,15 +1166,15 @@ void ofAppGLFWWindow::keyboard_cb(GLFWwindow* windowP_, int keycode, int scancod
 			key = OF_KEY_TAB;
 			break;   
 		default:
-			key = codepoint;
+			key = keycode;
 			break;
 	}
 
 	ofAppGLFWWindow * instance = setCurrent(windowP_);
 	if(action == GLFW_PRESS || action == GLFW_REPEAT){
-		instance->events().notifyKeyPressed(key,keycode,scancode,codepoint);
+		instance->events().notifyKeyPressed(key,keycode,scancode);
 	}else if (action == GLFW_RELEASE){
-		instance->events().notifyKeyReleased(key,keycode,scancode,codepoint);
+		instance->events().notifyKeyReleased(key,keycode,scancode);
 	}
 }
 

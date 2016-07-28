@@ -278,7 +278,7 @@ bool ofCoreEvents::notifyDraw(){
 }
 
 //------------------------------------------
-bool ofCoreEvents::notifyKeyPressed(int key, int keycode, int scancode, uint32_t codepoint){
+bool ofCoreEvents::notifyKeyPressed(int key, int keycode, int scancode){
 	// FIXME: modifiers are being reported twice, for generic and for left/right
 	// add operators to the arguments class so it can be checked for both
 	bool attended = false;
@@ -305,7 +305,7 @@ bool ofCoreEvents::notifyKeyPressed(int key, int keycode, int scancode, uint32_t
 
 	pressedKeys.insert(key);
 	if(!attended){
-		ofKeyEventArgs keyEventArgs(ofKeyEventArgs::Pressed,key,keycode,scancode,codepoint);
+		ofKeyEventArgs keyEventArgs(ofKeyEventArgs::Pressed,key,keycode,scancode);
 		return ofNotifyEvent( keyPressed, keyEventArgs );
 	}else{
 		return attended;
@@ -313,7 +313,7 @@ bool ofCoreEvents::notifyKeyPressed(int key, int keycode, int scancode, uint32_t
 }
 
 //------------------------------------------
-bool ofCoreEvents::notifyKeyReleased(int key, int keycode, int scancode, uint32_t codepoint){
+bool ofCoreEvents::notifyKeyReleased(int key, int keycode, int scancode){
 	// FIXME: modifiers are being reported twice, for generic and for left/right
 	// add operators to the arguments class so it can be checked for both
 	bool attended = false;
@@ -340,7 +340,7 @@ bool ofCoreEvents::notifyKeyReleased(int key, int keycode, int scancode, uint32_
     
 	pressedKeys.erase(key);
 	if(!attended){
-		ofKeyEventArgs keyEventArgs(ofKeyEventArgs::Released,key,keycode,scancode,codepoint);
+		ofKeyEventArgs keyEventArgs(ofKeyEventArgs::Released,key,keycode,scancode);
 		return ofNotifyEvent( keyReleased, keyEventArgs );
 	}else{
 		return attended;
@@ -352,9 +352,9 @@ bool ofCoreEvents::notifyKeyReleased(int key, int keycode, int scancode, uint32_
 bool ofCoreEvents::notifyKeyEvent(const ofKeyEventArgs & keyEvent){
 	switch(keyEvent.type){
 		case ofKeyEventArgs::Pressed:
-			return notifyKeyPressed(keyEvent.key, keyEvent.keycode, keyEvent.scancode, keyEvent.codepoint);
+			return notifyKeyPressed(keyEvent.key, keyEvent.keycode, keyEvent.scancode);
 		case ofKeyEventArgs::Released:
-			return notifyKeyReleased(keyEvent.key, keyEvent.keycode, keyEvent.scancode, keyEvent.codepoint);
+			return notifyKeyReleased(keyEvent.key, keyEvent.keycode, keyEvent.scancode);
 	}
 	return false;
 }

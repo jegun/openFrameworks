@@ -312,6 +312,7 @@ ifneq ($(PLATFORM_ARCH),armv6l)
     PLATFORM_LIBRARIES += Xcursor 
     PLATFORM_LIBRARIES += dl 
     PLATFORM_LIBRARIES += pthread
+    PLATFORM_LIBRARIES += glfw
 endif
     
 PLATFORM_LIBRARIES += freeimage
